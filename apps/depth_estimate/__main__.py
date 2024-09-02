@@ -183,6 +183,10 @@ def test_simple(args):
                 output_name = os.path.splitext(os.path.basename(image_path))[0]
                 output_file = os.path.join(output_path, "{}_depth.png".format(output_name))
                 im.save(output_file)
+            
+            # Lưu ảnh độ sâu dưới dạng .npy
+            depth_np = depth.astype(np.float32)  # Đảm bảo dữ liệu là kiểu float32
+            np.save(os.path.join(output_path, "{}.npy".format(output_name)), depth_np)
 
             time_one_image = round((end-begin) * 1000)
             print("   Processed {:d} of {:d} images - saved prediction to {} - Computing time {}ms".format(
